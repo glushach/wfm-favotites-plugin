@@ -1,8 +1,17 @@
+p.wfm-favotites-link {
+  display: flex;
+  align-items: center;
+  height: 59px;
+}
 p.wfm-favotites-link a {
   text-decoration: underline;
   text-decoration-style: dotted;
   border: none;
+  padding: 17.5px 0;
 }
 p.wfm-favotites-link a:hover {
   text-decoration: none;
+}
+.wfm-favorites-hidden {
+  display: none;
 }
