@@ -12,3 +12,4 @@ require __DIR__ . '/functions.php';
 
 add_filter('the_content', 'wfm_favotites_content');
 add_action('wp_enqueue_scripts', 'wfm_favorites_scripts');
+add_action( 'wp_ajax_wfm_test', 'wp_ajax_wfm_callback' );
