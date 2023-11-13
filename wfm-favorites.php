@@ -8,10 +8,7 @@ Author: Александр
 Author URI: http://webformyself.com
 */
 
+require __DIR__ . '/functions.php';
+
 add_filter('the_content', 'wfm_favotites_content');
-
-function wfm_favotites_content($content) {
-  if (!is_single() || !is_user_logged_in()) return $content;
-  return '<p class="wfm-favotites-link"><a href="#">Добавить в Изранное</a></p>' . $content;
-}
-
+add_action('wp_enqueue_scripts', 'wfm_favorites_scripts');

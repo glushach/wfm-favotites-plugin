@@ -1,0 +1,8 @@
+p.wfm-favotites-link a {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  border: none;
+}
+p.wfm-favotites-link a:hover {
+  text-decoration: none;
+}
