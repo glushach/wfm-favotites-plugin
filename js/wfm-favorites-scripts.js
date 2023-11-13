@@ -2,7 +2,8 @@ jQuery(document).ready(function ($) {
   $(".wfm-favotites-link a").click(function (e) {
     $.ajax({
       type: 'POST',
-      url: '/wp-admin/admin-ajax.php',
+      // url: '/wp-admin/admin-ajax.php',
+      url: wfmFavotites.url,
       data: {
         test: 'Test',
         action: 'wfm_test',
