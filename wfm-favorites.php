@@ -11,9 +11,7 @@ Author URI: http://webformyself.com
 add_filter('the_content', 'wfm_favotites_content');
 
 function wfm_favotites_content($content) {
-  if (is_single()) {
-    return '<p class="wfm-favotites-link"><a href="#">Добавить в Изранное</a></p>' . $content;
-  }
-  return $content;
+  if (!is_single() || !is_user_logged_in()) return $content;
+  return '<p class="wfm-favotites-link"><a href="#">Добавить в Изранное</a></p>' . $content;
 }
 
