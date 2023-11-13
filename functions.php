@@ -7,10 +7,10 @@ function wfm_favotites_content($content)
 
   global $post;
   if (wfm_is_favorites($post->ID)) {
-    return '<p class="wfm-favotites-link"><a href="#">Удалить из Изранного</a></p>' . $content;
+    return '<p class="wfm-favotites-link"><span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span><a data-action="del" href="#">Удалить из Избранного</a></p>' . $content;
   }
 
-  return '<p class="wfm-favotites-link"><span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span><a href="#">Добавить в Изранное</a></p>' . $content;
+  return '<p class="wfm-favotites-link"><span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span><a data-action="add" href="#">Добавить в Изранное</a></p>' . $content;
 }
 
 function wfm_favorites_scripts()
@@ -30,7 +30,7 @@ function wfm_favorites_scripts()
   );
 }
 
-function wp_ajax_wfm_callback()
+function wp_ajax_wfm_callback_add()
 {
   if (!wp_verify_nonce($_POST['security'], 'wfm-favorites')) {
     wp_die('Ошибка безопасности!');
@@ -55,4 +55,21 @@ function wfm_is_favorites($post_id)
     if ($favorite == $post_id) return true;
   }
   return false;
+}
+
+function wp_ajax_wfm_callback_del()
+{
+  if (!wp_verify_nonce($_POST['security'], 'wfm-favorites')) {
+    wp_die('Ошибка безопасности!');
+  }
+  $post_id = (int)$_POST['postId'];
+  $user = wp_get_current_user();
+
+  if (!wfm_is_favorites($post_id)) wp_die();
+
+  if (delete_user_meta($user->ID, 'wfm-favorites', $post_id)) {
+    wp_die('Удалено');
+  }
+
+  wp_die('Ошибка удаления');
 }

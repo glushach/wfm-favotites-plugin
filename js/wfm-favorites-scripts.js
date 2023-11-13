@@ -1,12 +1,13 @@
 jQuery(document).ready(function ($) {
   $(".wfm-favotites-link a").click(function (e) {
+    const action = $(this).data('action');
     $.ajax({
       type: 'POST',
       // url: '/wp-admin/admin-ajax.php',
       url: wfmFavotites.url,
       data: {
         security: wfmFavotites.nonce,
-        action: 'wfm_test',
+        action: 'wfm_' + action,
         postId: wfmFavotites.postId,
       },
       beforeSend: function() {
