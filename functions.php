@@ -18,7 +18,7 @@ function wfm_show_dashboard_widget()
     foreach($favorites as $favorite) {
       echo '<li class="wfm-favotites-link">
               <a href="' . get_permalink($favorite) . '" target="_blank">' . get_the_title($favorite) . '</a>
-              <span><a href="#" data-post="'. $favorite .'">&#10008;</a></span>
+              <span><a class="wfm-favorites-del" href="#" data-post="'. $favorite .'">&#10008;</a></span>
               <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
             </li>';
     }
@@ -36,6 +36,21 @@ function wfm_favotites_content($content)
   }
 
   return '<p class="wfm-favotites-link"><span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span><a data-action="add" href="#">Добавить в Изранное</a></p>' . $content;
+}
+
+function wfm_favorites_admin_scripts($hook)
+{
+  if($hook != 'index.php') return;
+  wp_enqueue_script('wfm-favorites-admin-scripts', plugins_url('/js/wfm-favorites-admin-scripts.js',  __FILE__), array('jquery'), null, true);
+  wp_enqueue_style('wfm-favorites-admin-style', plugins_url('/css/wfm-favorites-admin-style.css',  __FILE__));
+
+  wp_localize_script(
+    'wfm-favorites-admin-scripts',
+    'wfmFavotites',
+    array(
+      'nonce' => wp_create_nonce('wfm-favorites'),
+    )
+  );
 }
 
 function wfm_favorites_scripts()
