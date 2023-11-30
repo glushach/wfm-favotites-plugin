@@ -13,13 +13,14 @@ function wfm_show_dashboard_widget()
     echo 'Список пуст';
     return;
   }
-  /* $str = implode(',', $favorites);
-  $wfm_posts = get_posts(['include' => $str]);
-  var_dump($wfm_posts); */
-  // $data = [];
+  $img_src = plugins_url('/img/loader.gif', __FILE__);
   echo '<ul>';
     foreach($favorites as $favorite) {
-      echo '<li><a href="' . get_permalink($favorite) . '" target="_blank">' . get_the_title($favorite) . '</a></li>';
+      echo '<li class="wfm-favotites-link">
+              <a href="' . get_permalink($favorite) . '" target="_blank">' . get_the_title($favorite) . '</a>
+              <span><a href="#" data-post="'. $favorite .'">&#10008;</a></span>
+              <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
+            </li>';
     }
   echo '</ul>';
 }
