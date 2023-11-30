@@ -23,6 +23,10 @@ function wfm_show_dashboard_widget()
             </li>';
     }
   echo '</ul>';
+  echo '<div class="wfm-favorites-del-all">
+    <button class="button" id="wfm-favorites-del-all">Очистить список</button>
+    <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
+  </div>';
 }
 
 function wfm_favotites_content($content)
@@ -85,6 +89,19 @@ function wp_ajax_wfm_callback_add()
   }
 
   wp_die('Ошибка добавления');
+}
+
+function wp_ajax_wfm_callback_del_all() {
+  if (!wp_verify_nonce($_POST['security'], 'wfm-favorites')) {
+    wp_die('Ошибка безопасности!');
+  }
+
+  $user = wp_get_current_user();
+  if(delete_metadata('user', $user->ID, 'wfm-favorites')) {
+    wp_die('Список очищен');
+  } else {
+    wp_die('Ошибка удаления');
+  }
 }
 
 function wp_ajax_wfm_callback_del()

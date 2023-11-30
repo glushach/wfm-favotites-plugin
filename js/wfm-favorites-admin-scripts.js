@@ -27,9 +27,44 @@ jQuery(document).ready(function ($) {
           });
         },
         error: function() {
-          alert('Error');
+          alert('Ошибка!');
         }
       });
     });
 
+    $('#wfm-favorites-del-all').click(function(e) {
+      e.preventDefault();
+      if(!confirm("Подтвердите удаление")) return false;
+      const $this = $(this),
+            loader = $this.next(),
+            parent = $this.parent(),
+            list = parent.prev();
+      $.ajax({
+        type: 'POST',
+        url: ajaxurl,
+        data: { 
+          security: wfmFavotites.nonce,
+          action: 'wfm_del_all',
+        },
+        beforeSend: function() {
+          $this.fadeOut(300, function() {
+            loader.fadeIn();
+          });
+        },
+        success: function(res) {
+          loader.fadeOut(300, function() {
+            if(res === 'Список очищен') {
+              parent.html(res);
+              list.fadeOut();
+            } else {
+              $this.fadeIn();
+              alert(res);
+            }
+          });
+        },
+        error: function() {
+          alert('Ошибка!');
+        }
+      });
+    });
 });
