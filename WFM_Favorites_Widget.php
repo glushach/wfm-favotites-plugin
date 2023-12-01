@@ -9,7 +9,7 @@ class WFM_Favorites_Widget extends WP_Widget
       'name' => 'Избранные записи',
       'description' => 'Выводит блок избранных записей пользователя'
     ];
-    parent::__construct('wfm-favorites-wdget', '', $args);
+    parent::__construct('wfm-favorites-widget', '', $args);
   }
 
   // форма виджета в админке
@@ -30,7 +30,13 @@ class WFM_Favorites_Widget extends WP_Widget
   // виджет в пользовательской части
   public function widget($args, $instance)
   {
-    
+    if (!is_user_logged_in()) return;
+    echo $args['before_widget'];
+      echo $args['before_title'];
+        echo $instance['title'];
+      echo $args['after_title'];
+      wfm_show_dashboard_widget();
+    echo $args['after_widget'];
   }
 
   // обновление настроек виджета в админке

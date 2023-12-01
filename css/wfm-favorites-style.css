@@ -15,3 +15,13 @@ p.wfm-favotites-link a:hover {
 .wfm-favorites-hidden {
   display: none;
 }
+.widget_wfm-favorites-widget ul {
+  list-style: none;
+}
+.wfm-favorites-del {
+  color: #ff0000;
+  font-weight: bold;
+}
+.wfm-favorites-del:hover {
+  color: #cc0000;
+}
