@@ -19,9 +19,5 @@ p.wfm-favotites-link a:hover {
   list-style: none;
 }
 .wfm-favorites-del {
-  color: #ff0000;
-  font-weight: bold;
-}
-.wfm-favorites-del:hover {
-  color: #cc0000;
+  font-size: 0;
 }
