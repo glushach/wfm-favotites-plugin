@@ -9,6 +9,7 @@ function wfm_show_dashboard_widget()
 {
   $user = wp_get_current_user();
   $favorites = get_user_meta($user->ID, 'wfm-favorites');
+  $favorites = array_reverse($favorites);
   if(!$favorites) {
     echo 'Список пуст';
     return;
@@ -16,7 +17,7 @@ function wfm_show_dashboard_widget()
   $img_src = plugins_url('/img/loader.gif', __FILE__);
   echo '<ul>';
     foreach($favorites as $favorite) {
-      echo '<li class="wfm-favotites-link">
+      echo '<li class="cat-item cat-item-'. $favorite .'">
               <a href="' . get_permalink($favorite) . '" target="_blank">' . get_the_title($favorite) . '</a>
               <span><a class="wfm-favorites-del" href="#" data-post="'. $favorite .'">&#10008;</a></span>
               <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
