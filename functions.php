@@ -87,7 +87,14 @@ function wp_ajax_wfm_callback_add()
   if (wfm_is_favorites($post_id)) wp_die();
 
   if (add_user_meta($user->ID, 'wfm-favorites', $post_id)) {
-    wp_die('Добавленно');
+    $img_src = plugins_url('/img/loader.gif', __FILE__);
+    wp_die(
+      '<li class="cat-item cat-item-'. $post_id .'">
+        <a href="' . get_permalink($post_id) . '" target="_blank">' . get_the_title($post_id) . '</a>
+        <span><a class="wfm-favorites-del" href="#" data-post="'. $post_id .'">&#10008;</a></span>
+        <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
+      </li>'
+    );
   }
 
   wp_die('Ошибка добавления');

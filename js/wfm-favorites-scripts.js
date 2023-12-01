@@ -17,9 +17,13 @@ jQuery(document).ready(function ($) {
       },
       success: function(res) {
         $('.wfm-favotites-link .wfm-favorites-hidden').fadeOut(300, function() {
-          $('.wfm-favotites-link').html(res);
           if(action == 'del') {
+            $('.wfm-favotites-link').html('Удалено');
             $('.widget_wfm-favorites-widget').find('li.cat-item-' + wfmFavotites.postId).remove();
+          }
+          if(action == 'add') {
+            $('.wfm-favotites-link').html('Добавлено');
+            $('.widget_wfm-favorites-widget ul').prepend(res);
           }
         });
       },
