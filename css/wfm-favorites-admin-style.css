@@ -1,11 +1,11 @@
-li.wfm-favotites-link {
+li.cat-item {
   display: flex;
   align-items: center;
   height: 20px;
 }
 
 .wfm-favorites-del-all img,
-.wfm-favotites-link img {
+.cat-item img {
   height: 20px;
 }
 

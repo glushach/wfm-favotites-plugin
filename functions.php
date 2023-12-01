@@ -10,6 +10,7 @@ function wfm_show_dashboard_widget()
   $user = wp_get_current_user();
   $favorites = get_user_meta($user->ID, 'wfm-favorites');
   $favorites = array_reverse($favorites);
+  $admin_side = is_admin();
   if(!$favorites) {
     echo 'Список пуст';
     return;
@@ -18,16 +19,20 @@ function wfm_show_dashboard_widget()
   echo '<ul>';
     foreach($favorites as $favorite) {
       echo '<li class="cat-item cat-item-'. $favorite .'">
-              <a href="' . get_permalink($favorite) . '" target="_blank">' . get_the_title($favorite) . '</a>
-              <span><a class="wfm-favorites-del" href="#" data-post="'. $favorite .'">&#10008;</a></span>
-              <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
-            </li>';
+              <a href="' . get_permalink($favorite) . '" target="_blank">' . get_the_title($favorite) . '</a>';
+      if ($admin_side) {
+        echo  '<span><a class="wfm-favorites-del" href="#" data-post="'. $favorite .'">&#10008;</a></span>
+              <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>';
+      }
+      echo  '</li>';
     }
   echo '</ul>';
+  if ($admin_side) {
   echo '<div class="wfm-favorites-del-all">
     <button class="button" id="wfm-favorites-del-all">Очистить список</button>
     <span class="wfm-favorites-hidden"><img src="' . $img_src . '" alt=""></span>
   </div>';
+  }
 }
 
 function wfm_favotites_content($content)
